@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<head>
+        <title>Financeiro</title>
+</head>
+<html>
+
 <?php
 include_once __DIR__ . "/../config.php";
 include_once ROOT . "/sistema/painel.php";
@@ -15,6 +21,7 @@ $nivelMenu = $nivelMenuLogin['nivelMenu'];
 ?>
 
 
+    
 <div class="container-fluid mt-1">
     <div class="row">
         <div class="col-md-12 d-flex justify-content-center">
