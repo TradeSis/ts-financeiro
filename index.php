@@ -9,7 +9,7 @@ include_once __DIR__ . "/../config.php";
 include_once ROOT . "/sistema/painel.php";
 include_once ROOT . "/sistema/database/loginAplicativo.php";
 
-$nivelMenuLogin = buscaLoginAplicativo($_SESSION['idLogin'], 'Services');
+$nivelMenuLogin = buscaLoginAplicativo($_SESSION['idLogin'], 'Financeiro');
 
 
 $configuracao = 1;
@@ -88,10 +88,10 @@ $nivelMenu = $nivelMenuLogin['nivelMenu'];
 $src = "";
 
 if ($tab == "dashboard") {
-    $src = "demandas/dashboard.php";
+    //$src = "demandas/dashboard.php";
 }
 if ($tab == "contasareceber") {
-    $src = "contasareceber/";
+    $src = "contasareceber/index.php";
 }
 if ($tab == "configuracao") {
     $src = "configuracao/";
@@ -107,7 +107,7 @@ if ($src !== "") {
     ?>
     <div class="diviFrame">
         <iframe class="iFrame container-fluid " id="iFrameTab"
-            src="<?php echo URLROOT ?>/services/<?php echo $src ?>"></iframe>
+            src="<?php echo URLROOT ?>/financeiro/<?php echo $src ?>"></iframe>
     </div>
     <?php
 }
