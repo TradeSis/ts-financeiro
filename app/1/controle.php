@@ -12,6 +12,10 @@ if ($metodo == "GET") {
       include 'contasreceber.php';
       break;
 
+    case "contaspagar":
+      include 'contaspagar.php';
+      break;
+
    
 
     default:
@@ -30,6 +34,10 @@ if ($metodo == "PUT") {
 
     case "contasreceber":
       include 'contasreceber_inserir.php';
+      break;
+
+    case "contaspagar":
+      include 'contaspagar_inserir.php';
       break;
 
     default:
@@ -51,6 +59,10 @@ if ($metodo == "POST") {
       include 'contasreceber_alterar.php';
       break;
 
+    case "contaspagar":
+      include 'contaspagar_alterar.php';
+      break;
+
     default:
       $jsonSaida = json_decode(json_encode(
         array(
@@ -65,10 +77,7 @@ if ($metodo == "POST") {
 if ($metodo == "DELETE") {
   switch ($funcao) {
     
-    case "contasreceber":
-      include 'contasreceber_excluir.php';
-      break;
-
+  
     default:
       $jsonSaida = json_decode(json_encode(
         array(

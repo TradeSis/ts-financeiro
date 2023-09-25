@@ -37,12 +37,12 @@ $nivelMenu = $nivelMenuLogin['nivelMenu'];
 
                 if ($nivelMenu >= 1) {
                     if ($tab == '') {
-                        $tab = 'contasareceber';
+                        $tab = 'contasreceber';
                     } ?>
                     <li class="nav-item mr-1">
-                        <a class="nav-link1 nav-link <?php if ($tab == "contasareceber") {
+                        <a class="nav-link1 nav-link <?php if ($tab == "contasreceber") {
                             echo " active ";
-                        } ?>" href="?tab=contasareceber" role="tab">Contas à Receber</a>
+                        } ?>" href="?tab=contasreceber" role="tab">Contas à Receber</a>
                     </li>
 
                 <?php }
@@ -50,9 +50,9 @@ $nivelMenu = $nivelMenuLogin['nivelMenu'];
                 if ($nivelMenu >= 1) { ?>
 
                     <li class="nav-item mr-1">
-                        <a class="nav-link1 nav-link <?php if ($tab == "contasapagar") {
+                        <a class="nav-link1 nav-link <?php if ($tab == "contaspagar") {
                             echo " active ";
-                        } ?>" href="?tab=contasapagar" role="tab">Contas à Pagar</a>
+                        } ?>" href="?tab=contaspagar" role="tab">Contas à Pagar</a>
                     </li>
                 <?php }
 
@@ -90,8 +90,11 @@ $src = "";
 if ($tab == "dashboard") {
     //$src = "demandas/dashboard.php";
 }
-if ($tab == "contasareceber") {
-    $src = "contasareceber/index.php";
+if ($tab == "contasreceber") {
+    $src = "consultas/contasreceber.php";
+}
+if ($tab == "contaspagar") {
+    $src = "consultas/contaspagar.php";
 }
 if ($tab == "configuracao") {
     $src = "configuracao/";
