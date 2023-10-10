@@ -83,16 +83,16 @@ $nivelMenu = $nivelMenuLogin['nivelMenu'];
                         $getTab = '';
                     } ?>
                     <select class="form-select mt-2" id="subtabFinanceiro" style="color:#000; width:160px;text-align:center;">
-                        <option value="<?php echo URLROOT ?>/financeiro/index.php?tab=contasreceber" 
+                        <option value="<?php echo URLROOT ?>/financeiro/?tab=contasreceber" 
                         <?php if ($getTab == "contasreceber") {echo " selected ";} ?>>Contas à Receber</option>
 
-                        <option value="<?php echo URLROOT ?>/financeiro/index.php?tab=contaspagar" 
+                        <option value="<?php echo URLROOT ?>/financeiro/?tab=contaspagar" 
                         <?php if ($getTab == "contaspagar") {echo " selected ";} ?>>Contas à Pagar</option>
 
-                        <option value="<?php echo URLROOT ?>/financeiro/index.php?tab=dashboard" 
+                        <option value="<?php echo URLROOT ?>/financeiro/?tab=dashboard" 
                         <?php if ($getTab == "dashboard") {echo " selected ";} ?>>Dashboard</option>
 
-                        <option value="<?php echo URLROOT ?>/financeiro/index.php?tab=configuracao" 
+                        <option value="<?php echo URLROOT ?>/financeiro/?tab=configuracao" 
                         <?php if ($getTab == "configuracao") {echo " selected ";} ?>>Configurações</option>
                     </select>
                 </div>
