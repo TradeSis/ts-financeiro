@@ -30,7 +30,7 @@ $nivelMenu = $nivelMenuLogin['nivelMenu'];
         <div class="container-fluid">
 
             <div class="row">
-                <div class="col-lg-10 d-none d-md-none d-lg-block pr-0 pl-0 fundoAbas">
+                <div class="col-lg-10 d-none d-md-none d-lg-block pr-0 pl-0 ts-bgAplicativos">
                     <ul class="nav a" id="myTabs">
 
                         <?php
@@ -75,14 +75,14 @@ $nivelMenu = $nivelMenuLogin['nivelMenu'];
                     </ul>
                 </div>
                 <!--Essa coluna só vai aparecer em dispositivo mobile-->
-                <div class="col-7 col-md-9 d-md-block d-lg-none" style="background-color: #13216A;">
+                <div class="col-7 col-md-9 d-md-block d-lg-none ts-bgAplicativos">
                     <!--atraves do GET testa o valor para selecionar um option no select-->
                     <?php if (isset($_GET['tab'])) {
                         $getTab = $_GET['tab'];
                     } else {
                         $getTab = '';
                     } ?>
-                    <select class="form-select mt-2" id="subtabFinanceiro" style="color:#000; width:160px;text-align:center;">
+                    <select class="form-select mt-2 ts-selectSubMenuAplicativos" id="subtabFinanceiro">
                         <option value="<?php echo URLROOT ?>/financeiro/?tab=contasreceber" 
                         <?php if ($getTab == "contasreceber") {echo " selected ";} ?>>Contas à Receber</option>
 
@@ -121,8 +121,8 @@ $nivelMenu = $nivelMenuLogin['nivelMenu'];
             }
 
             if ($src !== "") { ?>
-                <div class="diviFrame">
-                    <iframe class="iFrame container-fluid " id="iFrameTab" src="<?php echo URLROOT ?>/financeiro/<?php echo $src ?>"></iframe>
+                <div class="container-fluid p-0 m-0">
+                    <iframe class="row p-0 m-0 ts-iframe"  src="<?php echo URLROOT ?>/financeiro/<?php echo $src ?>"></iframe>
                 </div>
             <?php } ?>
 
