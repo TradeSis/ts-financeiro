@@ -62,7 +62,7 @@ $clientes = buscaClientes();
             </div>
 
             <div class="col-12 col-sm-12 col-md-12 col-lg-2 order-lg-2 mt-4">
-                <h2 class="tituloTabela">Contas à Pagar</h2>
+                <h2 class="ts-tituloPrincipal">Contas à Pagar</h2>
             </div>
 
             <div class="col-12 col-sm-12 col-md-12 col-lg-5 order-lg-3">
@@ -292,6 +292,8 @@ $clientes = buscaClientes();
     <!-- LOCAL PARA COLOCAR OS JS -->
 
     <?php include_once ROOT . "/vendor/footer_js.php"; ?>
+        <!-- script para menu de filtros -->
+        <script src= "<?php echo URLROOT ?>/sistema/js/filtroTabela.js"></script>
 
     <script>
         buscar($("#buscaCP").val());
@@ -389,16 +391,6 @@ $clientes = buscaClientes();
             });
         });
 
-
-        /* $('.btnAbre').click(function() {
-            $('.menuFiltros').toggleClass('mostra');
-            $('.diviFrame').toggleClass('mostra');
-        }); */
-        /* Novo script para menu filtros */
-        $('.ts-btnFiltros').click(function() {
-            $('.ts-menuFiltros').toggleClass('mostra');
-            $('.ts-tableFiltros').toggleClass('mostra');
-        });
 
         var inserirModal = document.getElementById("inserirModal");
 
