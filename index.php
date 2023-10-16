@@ -44,7 +44,7 @@ $nivelMenu = $nivelMenuLogin['nivelMenu'];
                                 $tab = 'contasreceber';
                             } ?>
                             <li class="nav-item mr-1">
-                                <a class="nav-link1 nav-link 
+                                <a class="nav-link 
                                 <?php if ($tab == "contasreceber") {echo " active ";} ?>" 
                                 href="?tab=contasreceber" role="tab">Contas à Receber</a>
                             </li>
@@ -52,7 +52,7 @@ $nivelMenu = $nivelMenuLogin['nivelMenu'];
                         if ($nivelMenu >= 1) { ?>
 
                             <li class="nav-item mr-1">
-                                <a class="nav-link1 nav-link 
+                                <a class="nav-link 
                                 <?php if ($tab == "contaspagar") {echo " active ";} ?>" 
                                 href="?tab=contaspagar" role="tab">Contas à Pagar</a>
                             </li>
@@ -60,13 +60,13 @@ $nivelMenu = $nivelMenuLogin['nivelMenu'];
                         if ($nivelMenu >= 1) { ?>
 
                             <li class="nav-item mr-1">
-                                <a class="nav-link1 nav-link <?php if ($tab == "dashboard") {echo " active ";} ?>" 
+                                <a class="nav-link <?php if ($tab == "dashboard") {echo " active ";} ?>" 
                                 href="?tab=dashboard" role="tab">Dashboard</a>
                             </li>
                         <?php }
                         if ($nivelMenu >= 4) { ?>
                             <li class="nav-item mr-1">
-                                <a class="nav-link1 nav-link 
+                                <a class="nav-link 
                                 <?php if ($tab == "configuracao") {echo " active ";} ?>" 
                                 href="?tab=configuracao" role="tab" data-toggle="tooltip" data-placement="top" title="Configurações"><i class="bi bi-gear"></i> Configurações</a>
                             </li>
