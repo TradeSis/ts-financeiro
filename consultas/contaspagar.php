@@ -1,307 +1,299 @@
 <?php
+// lucas 11102023 novo padrao
 // Gabriel 22092023 
 
-include_once(__DIR__ . '/../head.php');
+include_once(__DIR__ . '/../header.php');
 include_once(__DIR__ . '/../database/contaspagar.php');
 include_once(ROOT . '/cadastros/database/clientes.php');
 
 $clientes = buscaClientes();
 ?>
+<!doctype html>
+<html lang="pt-BR">
 
-</html>
+<head>
 
-<body class="bg-transparent">
+    <?php include_once ROOT . "/vendor/head_css.php"; ?>
 
-    <nav id="menuFiltros" class="menuFiltros"> <!-- MENUFILTROS -->
-        <div class="titulo"><span>Filtrar por:</span></div>
-        <ul>
-            <li class="col-sm-12">
-                <form class="d-flex" action="" method="post" style="text-align: right;">
-                    <select class="form-control" name="idCliente" id="FiltroClientes"
-                        style="font-size: 14px; width: 150px; height: 35px">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!-- MENUFILTROS -->
+        <nav class="ts-menuFiltros">
+            <label class="pl-2" for="">Filtrar por:</label>
+            <div class="col-12">
+                <form class="d-flex" action="" method="post">
+                    <select class="form-control" name="idCliente" id="FiltroClientes">
                         <option value="<?php echo null ?>">
                             <?php echo "Cliente" ?>
                         </option>
                         <?php
                         foreach ($clientes as $cliente) {
-                            ?>
+                        ?>
                             <option <?php
-                            /*  if ($cliente['idCliente'] == $idCliente) {
+                                    /*  if ($cliente['idCliente'] == $idCliente) {
                                 echo "selected";
                             } */
-                            ?> value="<?php echo $cliente['idCliente'] ?>">
+                                    ?> value="<?php echo $cliente['idCliente'] ?>">
                                 <?php echo $cliente['nomeCliente'] ?>
                             </option>
                         <?php } ?>
                     </select>
                 </form>
-            </li>
-        </ul>
+            </div>
+            <div class="col-sm text-end mt-2">
+                <a onClick="limpar()" role=" button" class="btn btn-sm bg-info text-white">Limpar</a>
+            </div>
+        </nav>
 
-        <div class="col-sm" style="text-align:right; color: #fff">
-            <a onClick="limpar()" role=" button" class="btn btn-sm" style="background-color:#84bfc3; ">Limpar</a>
-        </div>
-    </nav>
-
-
-    <div class="container-fluid text-center mt-4">
         <div class="row">
-            <div class=" btnAbre">
-                <span style="font-size: 25px; font-family: 'Material Symbols Outlined'!important;"
-                    class="material-symbols-outlined">
-                    filter_alt
-                </span>
+            <BR> <!-- MENSAGENS/ALERTAS -->
+        </div>
+        <div class="row">
+            <BR> <!-- BOTOES AUXILIARES -->
+        </div>
+        <div class="row">
+            <div class="col-6 order-1 col-sm-6  col-md-6 order-md-1 col-lg-1 order-lg-1 mt-3">
+                <button type="button" class="ts-btnFiltros btn btn-sm"><span style="font-size: 25px; font-family: 'Material Symbols Outlined'!important;" class="material-symbols-outlined">
+                        filter_alt
+                    </span></button>
+
             </div>
 
-            <div class="col-sm-3 ml-2">
-                <h2 class="tituloTabela">
-                    Contas à Pagar
-                </h2>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-2 order-lg-2 mt-4">
+                <h2 class="ts-tituloPrincipal">Contas à Pagar</h2>
             </div>
 
-            <div class="col-sm-4" style="margin-top:-10px;">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-5 order-lg-3">
                 <div class="input-group">
                     <input type="text" class="form-control" id="buscaCP" placeholder="Buscar por idCP">
                     <span class="input-group-btn">
-                        <button class="btn btn-primary" id="buscar" type="button" style="margin-top:10px;">
-                            <span style="font-size: 20px;font-family: 'Material Symbols Outlined'!important;"
-                                class="material-symbols-outlined">search</span>
+                        <button class="btn btn-primary mt-2" id="buscar" type="button">
+                            <span style="font-size: 20px;font-family: 'Material Symbols Outlined'!important;" class="material-symbols-outlined">search</span>
                         </button>
                     </span>
                 </div>
             </div>
 
-            <div class="col-sm" style="text-align:right">
-                <button type="button" class="btn btn-success mr-4" data-toggle="modal" data-target="#inserirModal"><i
-                        class="bi bi-plus-square"></i>&nbsp Novo</button>
+
+            <div class="col-6 order-2 col-sm-6 col-md-6 order-md-2 col-lg-4 order-lg-4 mt-3 text-end" style=" margin-left:-30px ">
+                <button type="button" class="btn btn-success mr-4" data-toggle="modal" data-target="#inserirModal"><i class="bi bi-plus-square"></i>&nbsp Novo</button>
             </div>
         </div>
 
-        <div class="card mt-2 text-center">
-            <div class="table table-sm table-hover table-striped table-wrapper-scroll-y my-custom-scrollbar diviFrame">
-                <table class="table">
-                    <thead class="cabecalhoTabela">
-                        <tr>
-                            <th>ID</th>
-                            <th>Cliente</th>
-                            <th>idNota</th>
-                            <th>Emissão</th>
-                            <th>Condição</th>
-                            <th>Documento</th>
-                            <th>vlPagar</th>
-                            <th>vlAberto</th>
-                            <th>Vencimento</th>
-                            <th>Liquidado</th>
-                            <th>Categoria</th>
-                            <th>CC</th>
-                            <th>Ação</th>
-                            <th></th>
-                        </tr>
-                    </thead>
+        <div class="table mt-2 ts-divTabela ts-tableFiltros">
+            <table class="table table-hover table-sm align-middle">
+                <thead class="ts-headertabelafixo">
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>idNota</th>
+                        <th>Emissão</th>
+                        <th>Condição</th>
+                        <th>Documento</th>
+                        <th>vlPagar</th>
+                        <th>vlAberto</th>
+                        <th>Vencimento</th>
+                        <th>Liquidado</th>
+                        <th>Categoria</th>
+                        <th>CC</th>
+                        <th>Ação</th>
+                        <th></th>
+                    </tr>
+                </thead>
 
-                    <tbody id='dados' class="fonteCorpo">
+                <tbody id='dados' class="fonteCorpo">
 
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
-    </div>
 
-    <!--------- INSERIR --------->
-    <div class="modal fade bd-example-modal-lg" id="inserirModal" tabindex="-1" role="dialog"
-        aria-labelledby="inserirModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Inserir CP</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="container-fluid">
-                    <form method="post" id="inserirFormCP">
-                        <div class="row" style="margin-top: 5px;">
-                            <div class="col-md" style="margin-top: 25px;">
-                                <div class="row">
-                                    <div class="col-md-6 form-group" style="margin-top: -20px;">
-                                        <label class="labelForm">numeroDocumento</label>
-                                        <input type="text" class="data select form-control" name="numeroDocumento"
-                                            required>
-                                    </div>
-                                    <div class="col-md-6 form-group-select" style="margin-top: -20px;">
-                                        <label class="labelForm">Cliente</label>
-                                        <input type="hidden" class="form-control" name="idCliente"
-                                            value="<?php echo $usuario['idUsuario'] ?>" readonly>
-                                        <select class="select form-control" name="idCliente" autocomplete="off"
-                                            style="margin-top: -10px;" required>
-                                            <?php
-                                            foreach ($clientes as $cliente) {
+
+        <!--------- INSERIR --------->
+        <div class="modal fade bd-example-modal-lg" id="inserirModal" tabindex="-1" role="dialog" aria-labelledby="inserirModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Inserir CP</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="container-fluid">
+                        <form method="post" id="inserirFormCP">
+                            <div class="row mt-4">
+                                <div class="col-md">
+                                    <div class="row mt-4">
+                                        <div class="col-md-6 form-group" style="margin-top: -20px;">
+                                            <label class="labelForm">numeroDocumento</label>
+                                            <input type="text" class="data select form-control" name="numeroDocumento" required>
+                                        </div>
+                                        <div class="col-md-6 form-group-select" style="margin-top: -20px;">
+                                            <label class="labelForm">Cliente</label>
+                                            <input type="hidden" class="form-control" name="idCliente" value="<?php echo $usuario['idUsuario'] ?>" readonly>
+                                            <select class="select form-control" name="idCliente" autocomplete="off" style="margin-top: -10px;" required>
+                                                <?php
+                                                foreach ($clientes as $cliente) {
                                                 ?>
-                                            <option value="<?php echo $cliente['idCliente'] ?>">
-                                                <?php echo $cliente['nomeCliente'] ?>
-                                            </option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                </div><!--fim row 1-->
-                                <div class="row">
-                                    <div class="col-md form-group" style="margin-top: -40px;">
-                                        <label class="labelForm">dataEmissao</label>
-                                        <input type="date" class="data select form-control" name="dataEmissao" required>
-                                    </div>
-                                    <div class="col-md form-group" style="margin-top: -40px;">
-                                        <label class="labelForm">dataVencimento</label>
-                                        <input type="date" class="data select form-control" name="dataVencimento">
-                                    </div>
-                                    <div class="col-md form-group" style="margin-top: -40px; ">
-                                        <label class="labelForm">condicao</label>
-                                        <select class="select form-control" name="condicao">
-                                            <option value="<?php echo null ?>">
-                                                <?php echo "Nenhuma" ?>
-                                            </option>
-                                            <option value="dias">dias</option>
-                                            <option value="Perc">Perc</option>
-                                        </select>
-                                    </div>
-                                </div><!--fim row 2-->
-                                <div class="row">
-                                    <div class="col-md form-group" style="margin-top: -40px;">
-                                        <label class="labelForm">valorPagar</label>
-                                        <input type="number" class="data select form-control" name="valorPagar"
-                                            required>
-                                    </div>
-                                    <div class="col-md form-group" style="margin-top: -40px;">
-                                        <label class="labelForm">valorAberto</label>
-                                        <input type="number" class="data select form-control" name="valorAberto">
-                                    </div>
-                                    <div class="col-md form-group" style="margin-top: -40px;">
-                                        <label class="labelForm">dataLiquidacao</label>
-                                        <input type="date" class="data select form-control" name="dataLiquidacao">
-                                    </div>
-                                </div><!--fim row 3-->
-                                <div class="row">
-                                    <div class="col-md form-group" style="margin-top: -40px;">
-                                        <label class="labelForm">idNotaServico</label>
-                                        <input type="number" class="data select form-control" name="idNotaServico">
-                                    </div>
-                                    <div class="col-md form-group" style="margin-top: -40px;">
-                                        <label class="labelForm">idCategoria</label>
-                                        <input type="number" class="data select form-control" name="idCategoria"
-                                            required>
-                                    </div>
-                                    <div class="col-md form-group" style="margin-top: -40px;">
-                                        <label class="labelForm">idContaCorrente</label>
-                                        <input type="number" class="data select form-control" name="idContaCorrente">
-                                    </div>
-                                </div><!--fim row 4-->
+                                                    <option value="<?php echo $cliente['idCliente'] ?>">
+                                                        <?php echo $cliente['nomeCliente'] ?>
+                                                    </option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div><!--fim row 1-->
+                                    <div class="row">
+                                        <div class="col-md form-group" style="margin-top: -40px;">
+                                            <label class="labelForm">dataEmissao</label>
+                                            <input type="date" class="data select form-control" name="dataEmissao" required>
+                                        </div>
+                                        <div class="col-md form-group" style="margin-top: -40px;">
+                                            <label class="labelForm">dataVencimento</label>
+                                            <input type="date" class="data select form-control" name="dataVencimento">
+                                        </div>
+                                        <div class="col-md form-group" style="margin-top: -40px; ">
+                                            <label class="labelForm">condicao</label>
+                                            <select class="select form-control" name="condicao">
+                                                <option value="<?php echo null ?>">
+                                                    <?php echo "Nenhuma" ?>
+                                                </option>
+                                                <option value="dias">dias</option>
+                                                <option value="Perc">Perc</option>
+                                            </select>
+                                        </div>
+                                    </div><!--fim row 2-->
+                                    <div class="row">
+                                        <div class="col-md form-group" style="margin-top: -40px;">
+                                            <label class="labelForm">valorPagar</label>
+                                            <input type="number" class="data select form-control" name="valorPagar" required>
+                                        </div>
+                                        <div class="col-md form-group" style="margin-top: -40px;">
+                                            <label class="labelForm">valorAberto</label>
+                                            <input type="number" class="data select form-control" name="valorAberto">
+                                        </div>
+                                        <div class="col-md form-group" style="margin-top: -40px;">
+                                            <label class="labelForm">dataLiquidacao</label>
+                                            <input type="date" class="data select form-control" name="dataLiquidacao">
+                                        </div>
+                                    </div><!--fim row 3-->
+                                    <div class="row">
+                                        <div class="col-md form-group" style="margin-top: -40px;">
+                                            <label class="labelForm">idNotaServico</label>
+                                            <input type="number" class="data select form-control" name="idNotaServico">
+                                        </div>
+                                        <div class="col-md form-group" style="margin-top: -40px;">
+                                            <label class="labelForm">idCategoria</label>
+                                            <input type="number" class="data select form-control" name="idCategoria" required>
+                                        </div>
+                                        <div class="col-md form-group" style="margin-top: -40px;">
+                                            <label class="labelForm">idContaCorrente</label>
+                                            <input type="number" class="data select form-control" name="idContaCorrente">
+                                        </div>
+                                    </div><!--fim row 4-->
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-footer bg-transparent" style="text-align:right">
-                            <button type="submit" class="btn btn-success">Cadastrar</button>
-                        </div>
-                    </form>
+                            <div class="card-footer bg-transparent text-end">
+                                <button type="submit" class="btn btn-success">Cadastrar</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--------- ALTERAR --------->
-    <div class="modal fade bd-example-modal-lg" id="alterarmodal" tabindex="-1" role="dialog"
-        aria-labelledby="alterarmodalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Alterar CP</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="container">
-                    <form method="post" id="alterarFormCP">
-                        <div class="row" style="margin-top: 5px;">
-                            <div class="col-md" style="margin-top: 25px;">
-                                <div class="row">
-                                    <div class="col-md-6 form-group" style="margin-top: -20px;">
-                                        <label class="labelForm">numeroDocumento</label>
-                                        <input type="text" class="data select form-control" id="numeroDocumento"
-                                            name="numeroDocumento" required>
-                                    </div>
-                                    <div class="col-md-6 form-group-select" style="margin-top: -20px;">
-                                        <label class="labelForm">Cliente</label>
-                                        <input type="text" class="data select form-control" name="nomeCliente"
-                                            id="nomeCliente" disabled>
-                                        <input type="text" class="data select form-control" name="idCliente"
-                                            id="idCliente" style="display: none;">
-                                        <input type="text" class="data select form-control" name="idCP" id="idCP"
-                                            style="display: none;">
-                                    </div>
-                                </div><!--fim row 1-->
-                                <div class="row">
-                                    <div class="col-md form-group" style="margin-top: -40px;">
-                                        <label class="labelForm">dataEmissao</label>
-                                        <input type="date" class="data select form-control" id="dataEmissao"
-                                            name="dataEmissao" required>
-                                    </div>
-                                    <div class="col-md form-group" style="margin-top: -40px;">
-                                        <label class="labelForm">dataVencimento</label>
-                                        <input type="date" class="data select form-control" id="dataVencimento"
-                                            name="dataVencimento">
-                                    </div>
-                                    <div class="col-md form-group" style="margin-top: -40px; ">
-                                        <label class="labelForm">condicao</label>
-                                        <select class="select form-control" id="condicao" name="condicao">
-                                            <option value="<?php echo null ?>">
-                                                <?php echo "Nenhuma" ?>
-                                            </option>
-                                            <option value="dias">dias</option>
-                                            <option value="Perc">Perc</option>
-                                        </select>
-                                    </div>
-                                </div><!--fim row 2-->
-                                <div class="row">
-                                    <div class="col-md form-group" style="margin-top: -40px;">
-                                        <label class="labelForm">valorPagar</label>
-                                        <input type="number" class="data select form-control" id="valorPagar"
-                                            name="valorPagar" required>
-                                    </div>
-                                    <div class="col-md form-group" style="margin-top: -40px;">
-                                        <label class="labelForm">valorAberto</label>
-                                        <input type="number" class="data select form-control" id="valorAberto"
-                                            name="valorAberto">
-                                    </div>
-                                    <div class="col-md form-group" style="margin-top: -40px;">
-                                        <label class="labelForm">dataLiquidacao</label>
-                                        <input type="date" class="data select form-control" id="dataLiquidacao"
-                                            name="dataLiquidacao">
-                                    </div>
-                                </div><!--fim row 3-->
-                                <div class="row">
-                                    <div class="col-md form-group" style="margin-top: -40px;">
-                                        <label class="labelForm">idNotaServico</label>
-                                        <input type="number" class="data select form-control" id="idNotaServico"
-                                            name="idNotaServico">
-                                    </div>
-                                    <div class="col-md form-group" style="margin-top: -40px;">
-                                        <label class="labelForm">idCategoria</label>
-                                        <input type="number" class="data select form-control" id="idCategoria"
-                                            name="idCategoria" required>
-                                    </div>
-                                    <div class="col-md form-group" style="margin-top: -40px;">
-                                        <label class="labelForm">idContaCorrente</label>
-                                        <input type="number" class="data select form-control" id="idContaCorrente"
-                                            name="idContaCorrente">
-                                    </div>
-                                </div><!--fim row 4-->
+        <!--------- ALTERAR --------->
+        <div class="modal fade bd-example-modal-lg" id="alterarmodal" tabindex="-1" role="dialog" aria-labelledby="alterarmodalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Alterar CP</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="container">
+                        <form method="post" id="alterarFormCP">
+                            <div class="row" style="margin-top: 5px;">
+                                <div class="col-md" style="margin-top: 25px;">
+                                    <div class="row">
+                                        <div class="col-md-6 form-group" style="margin-top: -20px;">
+                                            <label class="labelForm">numeroDocumento</label>
+                                            <input type="text" class="data select form-control" id="numeroDocumento" name="numeroDocumento" required>
+                                        </div>
+                                        <div class="col-md-6 form-group-select" style="margin-top: -20px;">
+                                            <label class="labelForm">Cliente</label>
+                                            <input type="text" class="data select form-control" name="nomeCliente" id="nomeCliente" disabled>
+                                            <input type="hidden" class="data select form-control" name="idCliente" id="idCliente">
+                                            <input type="hidden" class="data select form-control" name="idCP" id="idCP">
+                                        </div>
+                                    </div><!--fim row 1-->
+                                    <div class="row">
+                                        <div class="col-md form-group" style="margin-top: -40px;">
+                                            <label class="labelForm">dataEmissao</label>
+                                            <input type="date" class="data select form-control" id="dataEmissao" name="dataEmissao" required>
+                                        </div>
+                                        <div class="col-md form-group" style="margin-top: -40px;">
+                                            <label class="labelForm">dataVencimento</label>
+                                            <input type="date" class="data select form-control" id="dataVencimento" name="dataVencimento">
+                                        </div>
+                                        <div class="col-md form-group" style="margin-top: -40px; ">
+                                            <label class="labelForm">condicao</label>
+                                            <select class="select form-control" id="condicao" name="condicao">
+                                                <option value="<?php echo null ?>">
+                                                    <?php echo "Nenhuma" ?>
+                                                </option>
+                                                <option value="dias">dias</option>
+                                                <option value="Perc">Perc</option>
+                                            </select>
+                                        </div>
+                                    </div><!--fim row 2-->
+                                    <div class="row">
+                                        <div class="col-md form-group" style="margin-top: -40px;">
+                                            <label class="labelForm">valorPagar</label>
+                                            <input type="number" class="data select form-control" id="valorPagar" name="valorPagar" required>
+                                        </div>
+                                        <div class="col-md form-group" style="margin-top: -40px;">
+                                            <label class="labelForm">valorAberto</label>
+                                            <input type="number" class="data select form-control" id="valorAberto" name="valorAberto">
+                                        </div>
+                                        <div class="col-md form-group" style="margin-top: -40px;">
+                                            <label class="labelForm">dataLiquidacao</label>
+                                            <input type="date" class="data select form-control" id="dataLiquidacao" name="dataLiquidacao">
+                                        </div>
+                                    </div><!--fim row 3-->
+                                    <div class="row">
+                                        <div class="col-md form-group" style="margin-top: -40px;">
+                                            <label class="labelForm">idNotaServico</label>
+                                            <input type="number" class="data select form-control" id="idNotaServico" name="idNotaServico">
+                                        </div>
+                                        <div class="col-md form-group" style="margin-top: -40px;">
+                                            <label class="labelForm">idCategoria</label>
+                                            <input type="number" class="data select form-control" id="idCategoria" name="idCategoria" required>
+                                        </div>
+                                        <div class="col-md form-group" style="margin-top: -40px;">
+                                            <label class="labelForm">idContaCorrente</label>
+                                            <input type="number" class="data select form-control" id="idContaCorrente" name="idContaCorrente">
+                                        </div>
+                                    </div><!--fim row 4-->
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-footer bg-transparent" style="text-align:right">
-                            <button type="submit" class="btn btn-success">Salvar</button>
-                        </div>
-                    </form>
+                            <div class="card-footer bg-transparent text-end">
+                                <button type="submit" class="btn btn-success">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+    </div><!--container-fluid-->
+
+    <!-- LOCAL PARA COLOCAR OS JS -->
+
+    <?php include_once ROOT . "/vendor/footer_js.php"; ?>
+        <!-- script para menu de filtros -->
+        <script src= "<?php echo URLROOT ?>/sistema/js/filtroTabela.js"></script>
 
     <script>
         buscar($("#buscaCP").val());
@@ -311,13 +303,13 @@ $clientes = buscaClientes();
                 type: 'POST',
                 dataType: 'html',
                 url: '<?php echo URLROOT ?>/financeiro/database/contaspagar.php?operacao=filtrar',
-                beforeSend: function () {
+                beforeSend: function() {
                     $("#dados").html("Carregando...");
                 },
                 data: {
                     buscaCP: buscaCP
                 },
-                success: function (msg) {
+                success: function(msg) {
                     var json = JSON.parse(msg);
                     var linha = "";
                     for (var $i = 0; $i < json.length; $i++) {
@@ -361,16 +353,16 @@ $clientes = buscaClientes();
             });
         }
 
-        $("#buscaCP").click(function () {
+        $("#buscaCP").click(function() {
             buscar($("#buscaCP").val());
         });
-        document.addEventListener("keypress", function (e) {
+        document.addEventListener("keypress", function(e) {
             if (e.key === "Enter") {
                 buscar();
             }
         });
 
-        $(document).on('click', 'button[data-target="#alterarmodal"]', function () {
+        $(document).on('click', 'button[data-target="#alterarmodal"]', function() {
             var idCP = $(this).attr("data-idCP");
             //alert(idCP)
             $.ajax({
@@ -380,7 +372,7 @@ $clientes = buscaClientes();
                 data: {
                     idCP: idCP
                 },
-                success: function (data) {
+                success: function(data) {
                     $('#idCP').val(data.idCP);
                     $('#numeroDocumento').val(data.numeroDocumento);
                     $('#idCliente').val(data.idCliente);
@@ -400,20 +392,15 @@ $clientes = buscaClientes();
         });
 
 
-        $('.btnAbre').click(function () {
-            $('.menuFiltros').toggleClass('mostra');
-            $('.diviFrame').toggleClass('mostra');
-        });
-
         var inserirModal = document.getElementById("inserirModal");
 
         var inserirBtn = document.querySelector("button[data-target='#inserirModal']");
 
-        inserirBtn.onclick = function () {
+        inserirBtn.onclick = function() {
             inserirModal.style.display = "block";
         };
 
-        window.onclick = function (event) {
+        window.onclick = function(event) {
             if (event.target == inserirModal) {
                 inserirModal.style.display = "none";
             }
@@ -435,7 +422,7 @@ $clientes = buscaClientes();
                 });
             });
 
-          $("#alterarFormCP").submit(function(event) {
+            $("#alterarFormCP").submit(function(event) {
                 event.preventDefault();
                 var formData = new FormData(this);
                 $.ajax({
@@ -446,7 +433,7 @@ $clientes = buscaClientes();
                     contentType: false,
                     success: refreshPage,
                 });
-            }); 
+            });
 
             function refreshPage() {
                 window.location.reload();
@@ -454,7 +441,7 @@ $clientes = buscaClientes();
         });
     </script>
 
-
+    <!-- LOCAL PARA COLOCAR OS JS -FIM -->
 
 
 </body>
