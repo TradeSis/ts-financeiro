@@ -23,13 +23,13 @@ $clientes = buscaClientes();
 <body>
     <div class="container-fluid">
 
-        <nav class="ts-menuFiltros" style="margin-top: -50px;">
+        <nav class="ts-menuFiltros" style="margin-top: -45px;">
             <label class="pl-2" for="">Filtrar por:</label>
 
             <!-- Gabriel 06102023 ID 596 ajustado posiçao -->
             <div class="ls-label col-sm-12 mr-1"> <!-- ABERTO/FECHADO -->
                 <form class="d-flex" action="" method="post">
-                    <select class="form-control" name="idCliente" id="FiltroClientes">
+                    <select class="form-select ts-input" name="idCliente" id="FiltroClientes">
                         <option value="<?php echo null ?>">
                             <?php echo "Cliente" ?>
                         </option>
@@ -66,7 +66,7 @@ $clientes = buscaClientes();
             </div>
 
             <div class="col-10 order-1 col-sm-11 col-md mt-1-11 order-md-1 col-lg-2 order-lg-2 mt-4">
-                <h2 class="ts-tituloPrincipal">Tarefas</h2>
+                <h2 class="ts-tituloPrincipal">Contas à pagar</h2>
                 <h6 style="font-size: 10px;font-style:italic;text-align:left;"></h6>
             </div>
 
@@ -74,7 +74,7 @@ $clientes = buscaClientes();
                 <div class="input-group">
                     <input type="text" class="form-control ts-input" id="buscaCP" placeholder="Buscar por idCP">
                     <span class="input-group-btn">
-                        <button class="btn btn-primary" id="buscar" type="button" style="margin-top:10px;">
+                        <button class="btn btn-primary" id="buscar" type="button">
                             <span style="font-size: 20px;font-family: 'Material Symbols Outlined'!important;" class="material-symbols-outlined">search</span>
                         </button>
                     </span>
@@ -121,19 +121,19 @@ $clientes = buscaClientes();
             <div class="modal-dialog modal-lg modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Inserir CR</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Inserir CP</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form method="post" id="inserirFormCP">
-                            
+                            <div class="row">
                                 <div class="col-md">
                                     <div class="row mt-3">
                                         <div class="col-md-6">
                                             <label class="form-label ts-label">numeroDocumento</label>
                                             <input type="text" class="form-control ts-input" name="numeroDocumento" required>
                                         </div>
-                                        <div class="col-md-6 form-group-select">
+                                        <div class="col-md-6">
                                             <label class="form-label ts-label">Cliente</label>
                                             <input type="hidden" class="form-control" name="idCliente" value="<?php echo $usuario['idUsuario'] ?>" readonly>
                                             <select class="form-select ts-input" name="idCliente" autocomplete="off" required>
@@ -196,7 +196,7 @@ $clientes = buscaClientes();
                                         </div>
                                     </div><!--fim row 4-->
                                 </div>
-                           
+                            </div>
                     </div><!--body-->
                     <div class="modal-footer">
                         <div class="card-footer bg-transparent text-end">
@@ -214,36 +214,34 @@ $clientes = buscaClientes();
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Alterar CP</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form method="post" id="alterarFormCP">
                             <div class="row">
                                 <div class="col-md">
-                                    <div class="row">
-                                        <div class="col-md-6 mt-1">
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
                                             <label class="form-label ts-label">numeroDocumento</label>
                                             <input type="text" class="form-control ts-input" id="numeroDocumento" name="numeroDocumento" required>
                                         </div>
-                                        <div class="col-md-6 mt-1">
+                                        <div class="col-md-6">
                                             <label class="form-label ts-label">Cliente</label>
                                             <input type="text" class="form-control ts-input" name="nomeCliente" id="nomeCliente" disabled>
                                             <input type="hidden" class="form-control ts-input" name="idCliente" id="idCliente">
                                             <input type="hidden" class="form-control ts-input" name="idCP" id="idCP">
                                         </div>
                                     </div><!--fim row 1-->
-                                    <div class="row">
-                                        <div class="col-md mt-1">
+                                    <div class="row mt-3">
+                                        <div class="col-md">
                                             <label class="form-label ts-label">dataEmissao</label>
                                             <input type="date" class="form-control ts-input" id="dataEmissao" name="dataEmissao" required>
                                         </div>
-                                        <div class="col-md mt-1">
+                                        <div class="col-md">
                                             <label class="form-label ts-label">dataVencimento</label>
                                             <input type="date" class="form-control ts-input" id="dataVencimento" name="dataVencimento">
                                         </div>
-                                        <div class="col-md mt-1">
+                                        <div class="col-md">
                                             <label class="form-label ts-label">condicao</label>
                                             <select class="form-select ts-input" id="condicao" name="condicao">
                                                 <option value="<?php echo null ?>">
@@ -254,46 +252,46 @@ $clientes = buscaClientes();
                                             </select>
                                         </div>
                                     </div><!--fim row 2-->
-                                    <div class="row">
-                                        <div class="col-md mt-1">
+                                    <div class="row mt-3">
+                                        <div class="col-md">
                                             <label class="form-label ts-label">valorPagar</label>
                                             <input type="number" class="form-control ts-input" id="valorPagar" name="valorPagar" required>
                                         </div>
-                                        <div class="col-md mt-1">
+                                        <div class="col-md">
                                             <label class="form-label ts-label">valorAberto</label>
                                             <input type="number" class="form-control ts-input" id="valorAberto" name="valorAberto">
                                         </div>
-                                        <div class="col-md mt-1">
+                                        <div class="col-md">
                                             <label class="form-label ts-label">dataLiquidacao</label>
                                             <input type="date" class="form-control ts-input" id="dataLiquidacao" name="dataLiquidacao">
                                         </div>
                                     </div><!--fim row 3-->
-                                    <div class="row">
-                                        <div class="col-md mt-1">
+                                    <div class="row mt-3">
+                                        <div class="col-md">
                                             <label class="form-label ts-label">idNotaServico</label>
                                             <input type="number" class="form-control ts-input" id="idNotaServico" name="idNotaServico">
                                         </div>
-                                        <div class="col-md mt-1">
+                                        <div class="col-md">
                                             <label class="form-label ts-label">idCategoria</label>
                                             <input type="number" class="form-control ts-input" id="idCategoria" name="idCategoria" required>
                                         </div>
-                                        <div class="col-md mt-1">
+                                        <div class="col-md">
                                             <label class="form-label ts-label">idContaCorrente</label>
                                             <input type="number" class="form-control ts-input" id="idContaCorrente" name="idContaCorrente">
                                         </div>
                                     </div><!--fim row 4-->
                                 </div>
                             </div>
-                            <div class="card-footer bg-transparent text-end">
-                                <button type="submit" class="btn btn-success">Salvar</button>
-                            </div>
-                        </form>
+                    </div><!--body-->
+                    <div class="modal-footer">
+                        <div class="card-footer bg-transparent text-end">
+                            <button type="submit" class="btn btn-success">Salvar</button>
+                        </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
-
     <!-- LOCAL PARA COLOCAR OS JS -->
 
     <?php include_once ROOT . "/vendor/footer_js.php"; ?>
